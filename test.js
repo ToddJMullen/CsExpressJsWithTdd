@@ -8,20 +8,20 @@
  *      To execute tests cd into same dir and run node test.js
  ***********************/
 
-var request = require('supertest');
-var app = require('./app');
+var request = require( 'supertest' );
+var app = require( './app' );
 
-describe("Requests to the root path", function(){
-    it('returns 200 status code', function(done){
-        request(app)
-        .get('/')
-        .expect(200)
-        .end(function(error){
-            if(error) throw error;
-            done();
-        });
-    });
-});
+describe( "Make request to the root path", function(){
+    it( 'return 200 status code', function(done){
+        request( app )
+            .get( '/' )
+            .expect( 200 )
+            .end( function(error){
+                if(error){throw error;}
+                done();
+            } );
+    } );
+} );
 
 
 
