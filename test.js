@@ -10,6 +10,7 @@
 
 var request = require( 'supertest' );
 var app = require( './app' );
+var data = require('./shared-data');
 
 describe( "Make request to the root", function(){
     it( 'Return 200 status code', function(done){
@@ -32,31 +33,31 @@ describe( "Make request to the root", function(){
 //            } );
 //    });
 //
-//    it('Returns initial cities', function(done){
-//        request(app)
-//            .get('/cities')
-//            .expect(JSON.stringify(['Lotopia','Caspiana','Indigo']) )
-//            .end( function(error){
-//                if(error){throw error;}
-//            done();
-//        } );
-//    });
-
-    it('Returns a HTML', function(done){
+    it('Returns initial cities array', function(done){
         request(app)
-            .get('/')
-            .expect('Content-Type', /html/)
+            .get('/cities')
+            .expect( JSON.stringify(data.cities) )
             .end( function(error){
                 if(error){throw error;}
             done();
         } );
     });
 
-    it('Returns an index file with the cities', function(done){
-        request(app)
-            .get('/')
-            .expect(/cities/i, done);
-    });
+//    it('Returns a HTML', function(done){
+//        request(app)
+//            .get('/')
+//            .expect('Content-Type', /html/)
+//            .end( function(error){
+//                if(error){throw error;}
+//            done();
+//        } );
+//    });
+
+//    it('Returns an index file with the cities', function(done){
+//        request(app)
+//            .get('/')
+//            .expect(/cities/i, done);
+//    });
 
 } );
 

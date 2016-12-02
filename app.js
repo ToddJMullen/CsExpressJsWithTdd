@@ -9,7 +9,10 @@
 
 var express = require('express');
 var app = express();
-var cities = ['Lotopia','Caspiana','Indigo'];
+var data = require('./shared-data');
+
+app.use(express.static('public'));
+
 
 app.get("/", function(request, response){
    response.send("ok") ;
@@ -18,7 +21,7 @@ app.get("/", function(request, response){
 app.get("/cities", function(request, response){
     console.log("Received get request for /cities");
 
-    response.json(cities) ;
+    response.json(data.cities) ;
 });
 
 

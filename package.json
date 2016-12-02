@@ -4,8 +4,7 @@
   "description": "My code and additions following along with the screencast.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test.js"
-    ,"watch": "mocha -w app.js test.js"
+    "test": "mocha -w app.js test.js"
   },
   "author": "Todd Mullen via CodeSchool",
   "license": "ISC",
