@@ -4,7 +4,7 @@
   "description": "My code and additions following along with the screencast.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha -w app.js test.js"
+    "test": "mocha -w app.js test.js shared-data.js"
   },
   "author": "Todd Mullen via CodeSchool",
   "license": "ISC",

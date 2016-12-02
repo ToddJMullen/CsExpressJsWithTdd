@@ -9,7 +9,7 @@
 
 
 var data = {
-    cities: ['Lotopia','Caspiana','Indigo']
+    cities: ['Faustia','Lotopia','Caspiana','Indigo']
 };
 
 
