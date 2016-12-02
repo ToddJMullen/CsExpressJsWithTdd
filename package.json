@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test.js"
+    ,"watch": "mocha -w app.js test.js"
   },
   "author": "Todd Mullen via CodeSchool",
   "license": "ISC",

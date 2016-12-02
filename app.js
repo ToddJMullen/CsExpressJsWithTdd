@@ -9,12 +9,17 @@
 
 var express = require('express');
 var app = express();
+var cities = ['Lotopia','Caspiana','Indigo'];
 
 app.get("/", function(request, response){
    response.send("ok") ;
 });
 
+app.get("/cities", function(request, response){
+    console.log("Received get request for /cities");
 
+    response.json(cities) ;
+});
 
 
 //required for testability

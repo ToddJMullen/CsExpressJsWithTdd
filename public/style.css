@@ -1,0 +1,10 @@
+body{
+    color: #333;
+    background-image: url(bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 225px;
+}
+.glyphicon{
+    color: red;
+}
