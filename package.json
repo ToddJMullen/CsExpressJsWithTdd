@@ -1,0 +1,14 @@
+{
+  "name": "cs-build-express-with-tdd",
+  "version": "1.0.0",
+  "description": "My code and additions following along with the screencast.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Todd Mullen via CodeSchool",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
