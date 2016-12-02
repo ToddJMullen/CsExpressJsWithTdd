@@ -16,6 +16,13 @@ app.get("/", function(request, response){
 
 
 
-app.listen(3000, function(){
-    console.log("BuildingExpressJsWithTDD running on port 3000");
-});
+
+//required for testability
+module.exports = app;
+
+//moved into bin/www
+//bin/www made executable with chmod +x
+//to run server run ./bin/www from the project root (here)
+//app.listen(3000, function(){
+//    console.log("BuildingExpressJsWithTDD running on port 3000");
+//});
