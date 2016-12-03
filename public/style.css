@@ -4,7 +4,11 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: 225px;
+    background-position-x: 50%;
 }
 .glyphicon{
     color: red;
+}
+.list-group-item{
+    background: rgba(055,255,155, .13);
 }

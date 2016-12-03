@@ -10,10 +10,15 @@
 
 var request = require( 'supertest' );
 var app = require( './app' );
-var data = require('./shared-data');
+//var data = require('./shared-data');
+var redis = require('redis');
+var client = redis.createClient();
+client.select('test'.length);
+var data;
+//client.flushdb();
 
-describe( "Make request to the root\n", function(){
-    it( 'Return 200 status code', function(done){
+describe( "Making a request to the root", function(){
+    it( 'Returns 200 status code', function(done){
         request( app )
             .get( '/' )
             .expect( 200 )
@@ -23,18 +28,7 @@ describe( "Make request to the root\n", function(){
             } );
     } );
 
-//    it('Returns JSON', function(done){
-//        request(app)
-//            .get('/cities')
-//            .expect('Content-Type', /json/i)
-//            .end( function(error){
-//                if(error){throw error;}
-//                done();
-//            } );
-//    });
-//
-
-    it('Returns a HTML', function(done){
+    it('Returns HTML', function(done){
         request(app)
             .get('/')
             .expect('Content-Type', /html/)
@@ -44,16 +38,17 @@ describe( "Make request to the root\n", function(){
         } );
     });
 
-//    it('Returns an index file with the cities', function(done){
-//        request(app)
-//            .get('/')
-//            .expect(/(.*)*cities(.*)*/gi, done);
-//    });
+    it('Returns an index file with the "Add City" form', function(done){
+        request(app)
+            .get('/')
+            .expect(/formAddCity/gi, done);
+    });
 
 } );
 
 
-describe('List cities on the /cities route\n', function(){
+
+describe('List cities on the /cities route', function(){
 
     it('Return 200 status code', function(done){
         request(app)
@@ -61,28 +56,42 @@ describe('List cities on the /cities route\n', function(){
         .expect(200, done);
     });
 
-    it('Returns initial cities array as JSON', function(done){
+    before(function(){
+
+        client.hkeys('cities', function(error, names){
+            if(error){
+                throw error;
+            }
+            console.log("Setting expected data: ", names);
+            data = names;
+        });
+    });
+
+    it('Returns expected cities array as JSON', function(done){
         request(app)
             .get('/cities')
             .expect( 'Content-Type', /json/ )
-            .expect( data.cities )
+            .expect( data )
             .end( function(error){
                 if(error){throw error;}
-            done();
-        } );
+                    done();
+                }
+            );
     });
 });
 
-describe('Creating new cities\n', function(){
 
-    it('POST to /cities returns 201 status', function(done){
+
+describe('Creating new cities', function(){
+
+    it('POST /cities returns 201 status', function(done){
         request(app)
             .post('/cities')
             .send('name=TestCity&description=this+is+the+test')
             .expect(201, done);
     });
 
-    it('Should return the city name sent', function(done){
+    it('Returns the city name sent', function(done){
         request(app)
             .post('/cities')
             .send('name=TestCity&description=this+is+the+test')
@@ -90,7 +99,18 @@ describe('Creating new cities\n', function(){
     });
 });
 
+describe('Deleting cities', function(){
 
+    before(function(){
+        client.hset('cities', 'DeleteMe',   'I shouldn\'t be here!');
+    });
+
+    it('Returns 204 status', function(done){
+        request(app)
+            .delete('/cities/DeleteMe')
+            .expect(204, done);
+    });
+});
 
 
 
