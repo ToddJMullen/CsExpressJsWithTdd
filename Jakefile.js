@@ -9,7 +9,8 @@
 
 (function(){
     "use strict";
-    var NODE_VERSION = "v6.6.0";
+    var pkgJson = require("./package");
+    var NODE_VERSION = "v" + pkgJson.engines.node;
 
     desc( "Default build" );
     task( "default", ["version"], function(){

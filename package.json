@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "My code and additions following along with the screencast.",
   "main": "app.js",
+  "engines": {
+      "node": "6.6.0"
+  },
   "scripts": {
     "test": "NODE_ENV=test mocha -w app.js test.js"
   },
