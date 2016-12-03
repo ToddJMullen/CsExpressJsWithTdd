@@ -97,6 +97,14 @@ describe('Creating new cities', function(){
             .send('name=TestCity&description=this+is+the+test')
             .expect(/TestCity/, done);
     });
+
+    it('Validates city name & description', function(done){
+        request(app)
+            .post('/cities')
+            .send('name=&description=')
+            .expect(400, done);
+    });
+
 });
 
 describe('Deleting cities', function(){

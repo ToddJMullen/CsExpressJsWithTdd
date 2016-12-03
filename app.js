@@ -46,6 +46,10 @@ app.post("/cities"
 , function(request, response){
 //    console.log("POST /cities");
     var cityData = request.body;
+    if (!cityData.name || !cityData.description) {
+        response.sendStatus(400);
+        return false;
+    }
     client.hset('cities', cityData.name, cityData.description
         , function(error){
             if(error){
