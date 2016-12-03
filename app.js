@@ -40,6 +40,17 @@ app.get("/cities", function(request, response){
         response.json(names);
     });
 });
+app.get("/cities/:name", function(request, response){
+    console.log("Received get request for /cities/:name", request.params.name);
+//    response.status(200).send("<p>" + request.params.name + "</p>");
+    client.hget('cities', request.params.name,
+    function(error, description){
+        if(error){
+            throw error;
+        }
+        response.send("<p>" + description + "<p>");
+    });
+});
 
 app.post("/cities"
 , urldecode

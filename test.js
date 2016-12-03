@@ -120,6 +120,36 @@ describe('Deleting cities', function(){
     });
 });
 
+describe('Shows city info', function(){
+
+    before(function(){
+        client.hset('cities', 'BananaBoat', 'The description');
+    });
+
+    after(function(){
+        client.flushdb();
+//        client.hdel('cities', 'BananaBoat', function(error){
+//
+//        });
+    });
+
+    it('Returns 200 status code', function(done){
+        request(app)
+            .get('/cities/BananaBoat')
+            .expect(200, done);
+    });
+
+    it('Returns HTML', function(done){
+        request(app)
+            .get('/cities/BananaBoat')
+            .expect('Content-Type', /html/)
+            .end( function(error){
+                if(error){throw error;}
+            done();
+        } );
+    });
+
+});
 
 
 
