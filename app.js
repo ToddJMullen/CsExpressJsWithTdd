@@ -13,18 +13,21 @@ var app = express();
 var bodyParser = require('body-parser');
 var urldecode = bodyParser.urlencoded({extended:false});
 
+//app.set('view engine', 'ejs');
+
 //var data = require('./shared-data');
 var redis = require('redis');
 var client = redis.createClient();
 
 client.select((process.env.NODE_ENV || "development").length);
 
-client.hset('cities', 'Faustia',    'more dishonor quickly');
+client.hset('cities', 'Faustia',    'More dishonor quickly');
 client.hset('cities', 'Lotopia',    'For bears');
 client.hset('cities', 'Caspiana',   'The other place');
-client.hset('cities', 'Indigo',     'Out tha do');
+//client.hset('cities', 'Indigo',     'Out tha do');
 
 app.use(express.static('public'));
+
 
 app.get("/", function(request, response){
 //    console.log("GET /");
@@ -41,14 +44,21 @@ app.get("/cities", function(request, response){
     });
 });
 app.get("/cities/:name", function(request, response){
-    console.log("Received get request for /cities/:name", request.params.name);
-//    response.status(200).send("<p>" + request.params.name + "</p>");
-    client.hget('cities', request.params.name,
+    var name = request.params.name;
+    console.log("Received get request for /cities/:name", name);
+
+    client.hget('cities', name,
     function(error, description){
         if(error){
             throw error;
         }
-        response.send("<p>" + description + "<p>");
+        response.render("show.ejs", {
+            city: {
+                name: name
+                ,description: description
+            }
+        });
+//        response.send("<p>" + description + "<p>");
     });
 });
 
