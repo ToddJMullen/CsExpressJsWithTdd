@@ -12,7 +12,7 @@ var request = require( 'supertest' );
 var app = require( './app' );
 var data = require('./shared-data');
 
-describe( "Make request to the root", function(){
+describe( "Make request to the root\n", function(){
     it( 'Return 200 status code', function(done){
         request( app )
             .get( '/' )
@@ -33,44 +33,62 @@ describe( "Make request to the root", function(){
 //            } );
 //    });
 //
-    it('Returns initial cities array', function(done){
+
+    it('Returns a HTML', function(done){
         request(app)
-            .get('/cities')
-            .expect( JSON.stringify(data.cities) )
+            .get('/')
+            .expect('Content-Type', /html/)
             .end( function(error){
                 if(error){throw error;}
             done();
         } );
     });
 
-//    it('Returns a HTML', function(done){
-//        request(app)
-//            .get('/')
-//            .expect('Content-Type', /html/)
-//            .end( function(error){
-//                if(error){throw error;}
-//            done();
-//        } );
-//    });
-
 //    it('Returns an index file with the cities', function(done){
 //        request(app)
 //            .get('/')
-//            .expect(/cities/i, done);
+//            .expect(/(.*)*cities(.*)*/gi, done);
 //    });
 
 } );
 
 
-describe('List cities on the /cities route', function(){
+describe('List cities on the /cities route\n', function(){
 
     it('Return 200 status code', function(done){
         request(app)
         .get('/cities')
         .expect(200, done);
     });
+
+    it('Returns initial cities array as JSON', function(done){
+        request(app)
+            .get('/cities')
+            .expect( 'Content-Type', /json/ )
+            .expect( data.cities )
+            .end( function(error){
+                if(error){throw error;}
+            done();
+        } );
+    });
 });
 
+describe('Creating new cities\n', function(){
+
+    it('POST to /cities returns 201 status', function(done){
+        request(app)
+            .post('/cities')
+            .send('name=TestCity&description=this+is+the+test')
+            .expect(201, done);
+    });
+
+    it('Should return the city name sent', function(done){
+        request(app)
+            .post('/cities')
+            .send('name=TestCity&description=this+is+the+test')
+            .expect(/TestCity/, done);
+    });
+});
 
 
 

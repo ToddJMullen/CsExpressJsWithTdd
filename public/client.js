@@ -1,14 +1,14 @@
 $(function(){
 
-    $.get("/blocks", appendToList );
+    $.get("/cities", appendToList );
 
-    function appendToList(blocks){
+    function appendToList(cities){
         var list = [];
-        for( var i in blocks ){
-            var block = blocks[i];
+        for( var i in cities ){
+            var block = cities[i];
             content = "<a href='#' data-block='" + block + "'>"
                 + "<i class='glyphicon glyphicon-remove-circle'></i></a>"
-                + " <a href='/blocks/" + block + "'>" + block + "</a>";
+                + " <a href='/cities/" + block + "'>" + block + "</a>";
             list.push($("<li>", {html: content, class: "list-group-item"}));
         }
         $('.block-list').append(list);
@@ -20,7 +20,7 @@ $(function(){
         var blockData = form.serialize();
 
         $.ajax({
-            type:"POST", url:"/blocks", data: blockData
+            type:"POST", url:"/cities", data: blockData
         }).done(function(blockName){
             appendToList([blockName]);
             $('form').trigger('reset');
@@ -35,7 +35,7 @@ $(function(){
         }
 
         $.ajax({
-            type:"DELETE", url:"/blocks/" + target.data("block")
+            type:"DELETE", url:"/cities/" + target.data("block")
         }).done(function handleDeleted(){
             target.parents("li").remove();
         });
