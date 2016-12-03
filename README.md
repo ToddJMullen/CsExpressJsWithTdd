@@ -1,16 +1,15 @@
 CodeSchool's "Build an Express.js app with TDD"
 ========================
-
 This is me following along with CodeSchool screencast, embellishing, & adding mixins as I go.
+GitHub repo: https://github.com/ToddJMullen/CsExpressJsWithTdd
 
 
-Build Script
+To run the application
 ============
-$ node build
+`$ ./bin/www`
+from the project root
 
-Install Jake
-> npm install jake
-Run Jake
-> jake
-or
-> jake --tasks
+To test the project (starts watching app.js, cities.js, and test.js)
+============
+`$ npm test`
+

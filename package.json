@@ -7,7 +7,7 @@
     "node": "6.6.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha -w app.js test.js"
+    "test": "NODE_ENV=test mocha -w app.js test.js routes/cities.js"
   },
   "author": "Todd Mullen via CodeSchool",
   "license": "ISC",
