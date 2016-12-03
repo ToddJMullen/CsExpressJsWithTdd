@@ -310,7 +310,7 @@
     },
     "jake": {
       "version": "8.0.15",
-      "from": "jake@latest",
+      "from": "https://registry.npmjs.org/jake/-/jake-8.0.15.tgz",
       "resolved": "https://registry.npmjs.org/jake/-/jake-8.0.15.tgz",
       "dev": true,
       "dependencies": {

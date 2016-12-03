@@ -7,3 +7,10 @@ This is me following along with CodeSchool screencast, embellishing, & adding mi
 Build Script
 ============
 $ node build
+
+Install Jake
+> npm install jake
+Run Jake
+> jake
+or
+> jake --tasks

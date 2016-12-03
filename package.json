@@ -15,7 +15,7 @@
     "redis": "https://registry.npmjs.org/redis/-/redis-2.6.3.tgz"
   },
   "devDependencies": {
-    "jake": "^8.0.15",
+    "jake": "https://registry.npmjs.org/jake/-/jake-8.0.15.tgz",
     "mocha": "^3.2.0",
     "supertest": "^2.0.1"
   }
